@@ -106,7 +106,9 @@ AddEventHandler('rs_outfitbag:place',function ()
 
     -- Handle inventory based on Config.Inventory
     local count
-    if Config.Inventory == 'ox' then
+    if Config.Inventory == 'nord' or Config.Inventory == 'nord_inventory' or GetResourceState('nord_inventory') == 'started' then
+        count = exports.nord_inventory:GetItemCount(Config.Item.item)
+    elseif Config.Inventory == 'ox' then
 	 count = lib.callback.await('ox_inventory:getItemCount', false, Config.Item.item, {})
     elseif Config.Inventory == 'qs' then
 	 count = exports['qs-inventory']:Search(Config.Item.item)
